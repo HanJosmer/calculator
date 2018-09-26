@@ -1,0 +1,89 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.6em;
+}
+
+.main-container {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 700px;
+    width: 500px;
+    margin: 5% auto;
+    background-color: grey;
+}
+
+.main-item {
+    flex: 1 auto;
+    width: 90%;
+    margin: 5% auto;
+    background-color: navajowhite;
+}
+
+#display {
+    margin-bottom: 0px;
+}
+
+#buttons {
+    flex: 3 0px;
+}
+
+.button-container {
+    display: flex;
+    flex-flow: row nowrap;
+    color: whitesmoke;
+    user-select: none;
+}
+
+#numbers {
+    flex: 3 0px;
+}
+
+#operations {
+    flex: 1 0px;
+}
+
+.number-container {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-between;
+    text-align: center;
+}
+
+.number-item {
+    /* display: table; */
+    flex: 1 30%;
+    background-color: darkslategrey;
+}
+
+.number-item > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.number-item:hover {
+    background-color: whitesmoke;
+    color: darkslategrey;
+}
+
+.operation-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.operation-item {
+    display: table;
+    flex: 1 100%;
+    background-color: darkslateblue;
+}
+
+.operation-item > div {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.operation-item:hover {
+    background-color: whitesmoke;
+    color: darkslateblue;
+}
