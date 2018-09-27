@@ -75,9 +75,12 @@ body {
     background-color: darkslategrey;
 }
 
-.number-item > div {
+.number-item > p {
     display: table-cell;
     vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
 }
 
 .number-item:hover {
@@ -104,9 +107,12 @@ body {
     background-color: darkslateblue;
 }
 
-.operation-item > div {
+.operation-item > p {
     display: table-cell;
     vertical-align: middle;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
 }
 
 .operation-item:hover {
