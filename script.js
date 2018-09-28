@@ -1,57 +1,92 @@
 const elInput = document.querySelector("#current-number");
 const elWorkspace = document.querySelector("#rolling-calc");
 const elNumbers = document.querySelectorAll(".number");
+const elOperators = document.querySelectorAll(".operator");
 const elDelete = document.querySelector("#delete");
-const elAddition = document.querySelector("#addition");
-const elSubtraction = document.querySelector("#subtraction");
-const elMultiplication = document.querySelector("#multiplication");
-const elDivision = document.querySelector("#division");
+const elOperate = document.querySelector("#equals");
+
+// grab division symbol
+const divide = document.querySelector("#division").firstElementChild.textContent;
+
+let displayValue = "";
+let storedValue = "";
+let operation = "";
 
 elInput.textContent = "";
-
-// elInput.addEventListener('click', enterNumber(e))
 
 elNumbers.forEach(number => {
     number.addEventListener('click', enterNumber)
 });
 
-elDelete.addEventListener('click', clearEntry);
-elAddition.addEventListener('click', addition);
-elSubtraction.addEventListener('click', subtraction);
-elMultiplication.addEventListener('click', multiplication);
-elDivision.addEventListener('click', division);
+elOperators.forEach(operator => {
+    operator.addEventListener('click', (e) => {
+        storedValue = displayValue; operation = e.target.firstChild.textContent;
+        updateWorkspace(e); clearDisplay();
+    })
+})
+
+elOperate.addEventListener('click', () => {
+    displayValue = operate(operation);
+    updateDisplay(); clearWorkspace();
+});
+
+elDelete.addEventListener('click', clearDisplay);
 
 function enterNumber(e) {
     if (elInput.textContent.length < 11) {
-        elInput.textContent += e.target.textContent;
+        displayValue += e.target.firstChild.textContent;
+        updateDisplay(); 
     }
 }
 
-function clearEntry () {
+function clearDisplay () {
     if (elInput.textContent === "") {
         elWorkspace.textContent = "";
     }
     elInput.textContent = "";
+    displayValue = "";
+}
+
+function clearWorkspace () {
+    elWorkspace.textContent = "";
+}
+
+function updateDisplay() {
+    elInput.textContent = displayValue;
 }
 
 function updateWorkspace(e) {
-    elWorkspace.textContent += " " + elInput.textContent + " " + e.target.textContent;
-    elInput.textContent = "";
+    elWorkspace.textContent = storedValue + " " + e.target.firstChild.textContent;
 }
 
-function addition(e, elInput, elWorkspace) {
-    updateWorkspace(e);
-    // return +elInput.textContent + +elWorkspace.textContent;
+function operate(operation) {
+    switch (operation) {
+        case "+":
+            return addition(storedValue, displayValue);
+        case "-":
+            return subtraction(storedValue, displayValue);
+        case "x":
+            return multiplication(storedValue, displayValue);
+        case divide:
+            return division(storedValue, displayValue);
+        default:
+            break;
+    }
 }
 
-function subtraction(e, elInput, elWorkspace) {
-    updateWorkspace(e);
+function addition(x, y) {
+    return (+x) + (+y);
 }
 
-function multiplication (e, elInput, elWorkspace) {
-    updateWorkspace(e);
+function subtraction(x, y) {
+    return (+x) - (+y);
 }
 
-function division(e, elInput, elWorkspace) {
-    updateWorkspace(e);
+function multiplication (x, y) {
+    return (+x) * (+y);
+}
+
+function division(x, y) {
+    if (+y === 0) {return "DIV BY ZERO"}
+    return (+x) / (+y);
 }
